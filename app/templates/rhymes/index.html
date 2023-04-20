@@ -1,0 +1,55 @@
+<!doctype html>
+<head>
+    <title>Tìm Vần Rap</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='rhymes/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="../static/favicon.ico">
+</head>
+<html>
+   <body>
+     <main>
+        <div class="px-4 py-3 my-2 text-center">
+            <img class="d-block mx-auto mb-4" src="../static/android-chrome-192x192.png" alt="vietdoo Logo" width="192" height="192"/> 
+                
+              <h1 style = "background: linear-gradient( 90deg, #1841f8cc 10%, #a136d4d6, pink, rgb(53, 53, 53), black, white);
+              background-clip: border-box;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;">
+                Tìm Vần Rap</h1>       
+          </div>
+        <form method="post" action="{{url_for('rhymes.hello')}}">
+            <div class="col-md-6 mx-auto text-center">
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+                    {% if init %}
+                    <input type="text" class="form-control" id="new_word" name="new_word" placeholder = "{{query_name}}" style="max-width: 256px;">
+                    <script type="text/javascript">
+                      document.getElementById('new_word').value = "{{query_name}}";
+                    </script>
+                    {% else %}
+                    <input type="text" class="form-control" id="new_word" name="new_word" placeholder = "Nhập từ bất kì" style="max-width: 256px;">
+                    {% endif %}
+                  </div>            
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+                  <button type="submit" class="btn btn-primary btn-lg px-4 gap-3" name="btn" value = 'h1'>Tìm ngay</button>
+                </div>            
+            </div>
+        </form>
+
+        {% if init %}
+            {% if face_detected %}
+            <div class="px-4 py-3 my-2 text-center">
+              {% for word in van %} 
+                <h3>{{word}}</h3>
+              {% endfor %} 
+            </div>      
+            {% else %}
+            <div class="px-4 py-3 my-2 text-center" style = "font-size: 30px;">
+              <strong>Nope!</strong> Không tìm thấy
+            </div>    
+            {% endif %}
+
+        {% endif %}
+
+     </main>      
+   </body>
+</html>
